@@ -1,5 +1,6 @@
 import React from 'react';
 import cart from '../assets/blackCart.jpg'
+import { Link } from 'react-router-dom';
 
 const DarkSection2: React.FC = () => {
   return (
@@ -11,7 +12,7 @@ const DarkSection2: React.FC = () => {
           <p className="desc text-gray-400 mb-4 md:mb-10 lg:mb-12 max-md:!text-base !leading-8">
             We excel in providing swift shipment services that prioritize speed, reliability, and customer satisfaction. Our advanced logistics network ensures your packages are processed and delivered promptly, with real-time tracking for complete visibility. Our exceptional customer service make us the top choice for all your shipping needs.
           </p>
-          <button className="primaryBtn">Explore More Products</button>
+          <Link to="/track" className="primaryBtn">Track Your Products</Link>
         </div>
 
         <div className="w-full max-w-100">

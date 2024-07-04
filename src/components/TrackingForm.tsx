@@ -57,7 +57,7 @@ export default function TrackingForm() {
             type="submit"
             className="w-full text-gray-800 focus:ring-4 focus:outline-none font-medium rounded-xl text-base py-3 px-5 max-sm:py-4 text-center bg-[#00F0FF] hover:bg-blue-700 focus:ring-blue-800"
           >
-            {loading ? 'Loading...' : 'Submit'}
+            {loading ? <ImSpinner8 className='spin'/> : 'Submit'}
           </button>
         </div>
       </form>

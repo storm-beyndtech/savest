@@ -175,6 +175,50 @@ export const teamMembers: TeamMember[] = [
       { platform: 'linkedin', url: '#' },
     ],
   },
+  {
+    name: 'Rebecca Tylor',
+    position: 'SEO - Founder',
+    imageUrl: img1,
+    socialLinks: [
+      { platform: 'facebook', url: '#' },
+      { platform: 'twitter', url: '#' },
+      { platform: 'instagram', url: '#' },
+      { platform: 'linkedin', url: '#' },
+    ],
+  },
+  {
+    name: 'Helen Wilmore',
+    position: 'Manager',
+    imageUrl: img2,
+    socialLinks: [
+      { platform: 'facebook', url: '#' },
+      { platform: 'twitter', url: '#' },
+      { platform: 'instagram', url: '#' },
+      { platform: 'linkedin', url: '#' },
+    ],
+  },
+  {
+    name: 'Harley Russle',
+    position: 'Senior Worker',
+    imageUrl: img3,
+    socialLinks: [
+      { platform: 'facebook', url: '#' },
+      { platform: 'twitter', url: '#' },
+      { platform: 'instagram', url: '#' },
+      { platform: 'linkedin', url: '#' },
+    ],
+  },
+  {
+    name: 'Jennifer Rivera',
+    position: 'Cargo Head',
+    imageUrl: img4,
+    socialLinks: [
+      { platform: 'facebook', url: '#' },
+      { platform: 'twitter', url: '#' },
+      { platform: 'instagram', url: '#' },
+      { platform: 'linkedin', url: '#' },
+    ],
+  },
 ];
 
 

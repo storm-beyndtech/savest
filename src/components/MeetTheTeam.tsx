@@ -65,7 +65,7 @@ const MeetTheTeam: React.FC = () => {
             className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6"
           >
             {teamMembers.map((member, index) => (
-              <SwiperSlide key={index} className="flex h-auto">
+              <SwiperSlide key={index} className="flex h-auto cursor-pointer">
                 <div className="team-one__single">
                   <div className="team-one__single-img">
                     <div className="inner">

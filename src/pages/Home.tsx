@@ -18,6 +18,8 @@ import StockSlide from "@/components/stockSlide/StockSlide";
 import StockHeatmap from "@/components/StockHeatmap";
 import WideCard from "@/components/WideCard";
 import CardOne from "@/components/CardOne";
+import BlackSection from "@/components/BlackSection";
+import Mt5 from "@/components/Mt5";
 
 export default function Home() {
   return (
@@ -30,6 +32,7 @@ export default function Home() {
       <LightSectionV2 secData={HomeSec4}/>
       <AutoCount />
       <Features />
+      <Mt5 />
       <StockSlide />
       <LightSectionV2 secData={HomeSec1}/>
       <CryptoCarousel />
@@ -37,6 +40,7 @@ export default function Home() {
       <Pricing />
       <LightSection secData={HomeSec2}/>
       <StockHeatmap />
+      <BlackSection />
       <SpreadSteps />
       <Testimonials data={testimonies}/>
       <WideCard />

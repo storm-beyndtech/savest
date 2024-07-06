@@ -1,5 +1,6 @@
 import React from 'react';
 import phone from '../assets/hand-with-phone.png'
+import { Link } from 'react-router-dom';
 
 const DarkSection: React.FC = () => {
   return (
@@ -11,7 +12,7 @@ const DarkSection: React.FC = () => {
           <p className="desc text-gray-400 mb-4 md:mb-10 lg:mb-12 max-md:!text-base">
           Whether you CopyTrade or Trade manually, we support the trading of Currency Pairs, Stocks, Indices, Metals, and Crypto. If you are an advanced investor and prefer manual trading, you are always able to customize your settings or trade with a variety of advanced tools.
           </p>
-          <button className="primaryBtn">Explore Copy Trading</button>
+          <Link to="/copytrade" className="primaryBtn">Explore Copy Trading</Link>
         </div>
 
         <div className="w-full max-w-100">

@@ -9,7 +9,6 @@ import Contact from './pages/Contact';
 import Traders from './pages/Traders';
 import Label from './pages/Label';
 import Insurance from './pages/Insurance';
-import { Server } from 'lucide-react';
 import Tools from './pages/Tools';
 import Forex from './pages/Forex';
 import Commodities from './pages/Commodities';
@@ -48,6 +47,7 @@ import Kyc from './pages/Admin/Kyc';
 import Ship from './pages/Ship';
 import Track from './pages/Track';
 import ManageTracking from './pages/Admin/ManageTracking';
+import Servers from './pages/Servers';
 
 function App() {
   const { fetching, user } = contextData();
@@ -70,7 +70,7 @@ function App() {
           <Route path="/company/traders" element={<Traders />} />
           <Route path="/company/label" element={<Label />} />
           <Route path="/company/insurance" element={<Insurance />} />
-          <Route path="/company/servers" element={<Server />} />
+          <Route path="/company/servers" element={<Servers />} />
           <Route path="/company/tools" element={<Tools />} />
           <Route path="/products/forex" element={<Forex />} />
           <Route path="/products/commodities" element={<Commodities />} />

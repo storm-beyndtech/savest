@@ -434,6 +434,8 @@ export const BTC = [
   },
 ];
 
+
+
 export const testimonies = [
   {
     title: 'Product Manager | Capsule',
@@ -445,7 +447,7 @@ export const testimonies = [
   },
   {
     title: 'Senior Director of Operations | Fitbit',
-    name: 'Luisa',
+    name: 'Luisa Moreno',
     imgUrl:
       'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=facearea&facepad=2&w=320&h=320&q=80',
     message:
@@ -461,7 +463,7 @@ export const testimonies = [
   },
   {
     title: 'Tech Entrepreneur | Quantum',
-    name: 'Michael',
+    name: 'Michael Scott',
     imgUrl:
       'https://images.pexels.com/photos/3932542/pexels-photo-3932542.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
     message:
@@ -477,7 +479,7 @@ export const testimonies = [
   },
   {
     title: 'Wealth Manager | Quantum',
-    name: 'Anderson',
+    name: 'Anderson Cooper',
     imgUrl:
       'https://plus.unsplash.com/premium_photo-1682000321215-a061fd738095?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8ODV8fHdoaXRlJTIwbWFsZXxlbnwwfHwwfHx8MA%3D%3D',
     message:
@@ -485,7 +487,7 @@ export const testimonies = [
   },
   {
     title: 'Entrepreneur | Happy customer',
-    name: 'Clark',
+    name: 'Nate Cipher',
     imgUrl:
       'https://images.unsplash.com/photo-1554260570-9140fd3b7614?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MzR8fHdoaXRlJTIwbWFsZXxlbnwwfHwwfHx8MA%3D%3D',
     message:
@@ -493,7 +495,7 @@ export const testimonies = [
   },
   {
     title: 'Crypto Enthusiast | Cosmos',
-    name: 'Miller',
+    name: 'Miller Davis',
     imgUrl:
       'https://images.unsplash.com/photo-1514851947871-97fd1e04b2e5?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NjR8fHdoaXRlJTIwbWFsZXxlbnwwfHwwfHx8MA%3D%3D',
     message:
@@ -501,7 +503,7 @@ export const testimonies = [
   },
   {
     title: 'Retirement Planner | Nebula',
-    name: 'Yousaf',
+    name: 'Yousaf Khan',
     imgUrl:
       'https://images.unsplash.com/photo-1610611803787-7cd04238196f?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mzh8fHdoaXRlJTIwbWFsZXxlbnwwfHwwfHx8MA%3D%3D',
     message:
@@ -509,25 +511,22 @@ export const testimonies = [
   },
   {
     title: 'Socially Responsible Investor | Quantum',
-    name: 'Nathan',
+    name: 'Nathan Reed',
     imgUrl:
       'https://images.unsplash.com/photo-1590086782957-93c06ef21604?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8d2hpdGUlMjBtYWxlfGVufDB8fDB8fHww',
     message:
       "Savest's commitment to ethical financial practices is inspiring. Their recommendations are always aligned with my values, and their transparency in explaining financial strategies is refreshing. With their guidance, I've been able to achieve my financial goals while staying socially responsible.",
   },
-
-
-
   {
     title: 'CEO | Tech Innovators',
-    name: 'Emily Clark',
+    name: 'Emily Clerk',
     imgUrl: 'https://images.pexels.com/photos/6966103/pexels-photo-6966103.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load',
     message: "Savest has transformed our financial strategy. Their insights and tools are invaluable. I highly recommend them for anyone looking to optimize their financial planning.",
   },
   {
     title: 'Freelance Designer',
-    name: 'Samuel Green',
-    imgUrl: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=facearea&facepad=2&w=320&h=320&q=80',
+    name: 'Cliff West',
+    imgUrl: 'https://images.pexels.com/photos/5920775/pexels-photo-5920775.jpeg?auto=compress&cs=tinysrgb&w=600',
     message: "As a freelancer, managing finances can be tricky. Savest has simplified it for me. Their user-friendly platform and supportive team make financial management a breeze.",
   },
   {
@@ -581,16 +580,69 @@ export const testimonies = [
   {
     title: 'Consultant',
     name: 'Laura Garcia',
-    imgUrl: 'https://images.unsplash.com/photo-1520813792240-56fc4a3765a7?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=facearea&facepad=2&w=320&h=320&q=80',
+    imgUrl: 'https://images.pexels.com/photos/3756679/pexels-photo-3756679.jpeg?auto=compress&cs=tinysrgb&w=600',
     message: "The Savest team has been incredibly helpful in guiding me through complex financial decisions. Their personalized approach sets them apart from other services.",
   },
+
+
+
   {
     title: 'Engineer | BuildIt',
     name: 'Andrew Rodriguez',
     imgUrl: 'https://images.pexels.com/photos/3837259/pexels-photo-3837259.jpeg?auto=compress&cs=tinysrgb&w=600',
     message: "Savest has made it easy for me to manage my investments and savings. Their platform is intuitive, and their customer support is always available to answer my questions.",
   },
+  {
+    title: 'Financial Consultant',
+    name: 'Elizabeth Johnson',
+    imgUrl: 'https://images.pexels.com/photos/4467687/pexels-photo-4467687.jpeg?auto=compress&cs=tinysrgb&w=600',
+    message: "Savest has been an indispensable partner in my financial journey. Their customized advice and efficient tools have significantly improved my financial planning.",
+  },
+  {
+    title: 'Small Business Owner',
+    name: 'David Lee',
+    imgUrl: 'https://images.pexels.com/photos/5668774/pexels-photo-5668774.jpeg?auto=compress&cs=tinysrgb&w=600',
+    message: "Savest has been crucial in managing my business finances. Their strategic insights and proactive support have helped my business grow exponentially.",
+  },
+  {
+    title: 'Artist',
+    name: 'Karen Harris',
+    imgUrl: 'https://images.pexels.com/photos/7015101/pexels-photo-7015101.jpeg?auto=compress&cs=tinysrgb&w=600',
+    message: "Savest has made managing my finances as an artist straightforward and hassle-free. Their team understands the unique needs of creatives and provides tailored solutions.",
+  },
+  {
+    title: 'Startup Founder',
+    name: 'Sophia Nguyen',
+    imgUrl: 'https://images.pexels.com/photos/4491433/pexels-photo-4491433.jpeg?auto=compress&cs=tinysrgb&w=600',
+    message: "Savest has been a game-changer for my startup. Their financial guidance and resources have helped us navigate early-stage challenges and set us on a path to success.",
+  },
+  {
+    title: 'Photographer',
+    name: 'Phil Sullivan',
+    imgUrl: 'https://images.pexels.com/photos/1438081/pexels-photo-1438081.jpeg?auto=compress&cs=tinysrgb&w=600',
+    message: "Savest has simplified my financial management as a freelance photographer. Their intuitive platform and helpful team have been invaluable to my business.",
+  },
+  {
+    title: 'Health Coach',
+    name: 'Olivia Martinez',
+    imgUrl: 'https://images.pexels.com/photos/4936359/pexels-photo-4936359.jpeg?auto=compress&cs=tinysrgb&w=600',
+    message: "Savest's expertise has been instrumental in growing my health coaching business. Their tailored financial advice has helped me make informed decisions and achieve my goals.",
+  },
+  {
+    title: 'Digital Marketing Specialist',
+    name: 'Amy Robinson',
+    imgUrl: 'https://images.pexels.com/photos/1858175/pexels-photo-1858175.jpeg?auto=compress&cs=tinysrgb&w=600',
+    message: "Savest has revolutionized my financial management. Their platform is user-friendly, and their team is always ready to provide expert advice. Highly recommended!",
+  },
+  {
+    title: 'Business Consultant',
+    name: 'Dave Johnson',
+    imgUrl: 'https://images.pexels.com/photos/4195342/pexels-photo-4195342.jpeg?auto=compress&cs=tinysrgb&w=600',
+    message: "Savest's comprehensive financial solutions have been a game-changer for my consulting business. Their insights and tools are invaluable. I highly recommend their services to anyone looking to optimize their financial planning.",
+  }
+  
 ];
+
 
 export const tradeSteps = [
   {
@@ -764,13 +816,13 @@ export const contactHero = {
 export const tradersHero = {
   title: 'Expert Traders',
   subtitle:
-    'The Savest traders are one of the most competitive traders in the world. Making the most profit on BullCopytrade is an admirable title, getting it takes time, brains and patience. You can copy any of the traders at BullCopytrade.',
+    'The Savest traders are one of the most competitive traders in the world. Making the most profit on BullCopytrade is an admirable title, getting it takes time, brains and patience. You can copy any of the traders at Savest.',
 };
 
 export const labelHero = {
   title: 'White Label',
   subtitle:
-    "Savest ' white label partnership program is a complete solution giving your clients access to our market-leading liquidity and technology.",
+    "White label partnership program is a complete solution giving your clients access to our market-leading liquidity and technology.",
 };
 
 export const insuranceHero = {

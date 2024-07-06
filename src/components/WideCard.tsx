@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import CheckList from "./CheckList";
 
 export default function WideCard() {
@@ -29,9 +30,9 @@ export default function WideCard() {
             </li>
             ))}
           </ul>
-          <a href="#" className="primaryBtn !bg-gray-200 !text-black" >
+          <Link to="/more/pricing" className="primaryBtn !bg-gray-200 !text-black" >
             Pricing Overview <span className="ml-3">&rarr;</span>
-          </a>
+          </Link>
         </div>
     </section>
   )

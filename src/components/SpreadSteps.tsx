@@ -1,4 +1,5 @@
 const listItems = ['Raw spreads means really from 0.0 pips*', 'Our diverse and proprietary liquidity mix keeps spreads tight 24/5']
+import { Link } from "react-router-dom";
 import CheckList from "./CheckList";
 
 const SpreadSteps = () => {
@@ -21,9 +22,9 @@ const SpreadSteps = () => {
             </li>
             ))}
           </ul>
-          <a href="#" className="primaryBtn !bg-gray-200 !text-black" >
+          <Link to="/more/pricing" className="primaryBtn !bg-gray-200 !text-black" >
             Pricing Overview <span className="ml-3">&rarr;</span>
-          </a>
+          </Link>
         </div>
 
         <div className="bg-gray-100 rounded-3xl px-5 py-10 w-full max-w-[580px]">
@@ -55,9 +56,9 @@ const SpreadSteps = () => {
               </span>
             </li>
           </ul>
-          <a href="#" className="primaryBtn !bg-gray-200 !text-black" >
+          <Link to="/company/servers" className="primaryBtn !bg-gray-200 !text-black" >
             Get your Free VPS <span className="ml-3">&rarr;</span>
-          </a>
+          </Link>
         </div>
 
         <div className="bg-gray-100 rounded-3xl px-5 py-10 w-full max-w-[580px]">
@@ -89,9 +90,9 @@ const SpreadSteps = () => {
               </span>
             </li>
           </ul>
-          <a href="#" className="primaryBtn !bg-gray-200 !text-black" >
+          <Link to="/more/spreads" className="primaryBtn !bg-gray-200 !text-black" >
             Raw Pricing Benefits <span className="ml-3">&rarr;</span>
-          </a>
+          </Link>
         </div>
       </div>
 

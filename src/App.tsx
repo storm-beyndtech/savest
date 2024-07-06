@@ -47,6 +47,7 @@ import Settings from './pages/Admin/Settings';
 import Kyc from './pages/Admin/Kyc';
 import Ship from './pages/Ship';
 import Track from './pages/Track';
+import ManageTracking from './pages/Admin/ManageTracking';
 
 function App() {
   const { fetching, user } = contextData();
@@ -105,6 +106,7 @@ function App() {
                 <Route path="/admin/rejected-withdrawals" element={<RejectedWithdrawals />} />
                 <Route path="/admin/settings" element={<Settings />} />
                 <Route path="/admin/kyc" element={<Kyc />} />
+                <Route path="/admin/tracking" element={<ManageTracking />} />
               </Route>
 
               <Route path="/login" element={<Navigate to="/admin/" />} />

@@ -507,7 +507,7 @@ const AdminTrackingForm: React.FC<TrackingFormProps> = ({
 
 export default AdminTrackingForm;
 
-interface ClientDetails {
+export interface ClientDetails {
   name: string;
   email: string;
   phone: string;
@@ -516,7 +516,7 @@ interface ClientDetails {
   date: string;
 }
 
-interface PackageDetails {
+export interface PackageDetails {
   name: string;
   desc: string;
   length: string;
@@ -525,7 +525,7 @@ interface PackageDetails {
   width: string;
 }
 
-interface ShippingUpdate {
+export interface ShippingUpdate {
   message: string;
   location: string;
   status: string;

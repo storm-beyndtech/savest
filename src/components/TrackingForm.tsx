@@ -1,8 +1,13 @@
 import { useState } from 'react';
 import { ImSpinner8 } from 'react-icons/im';
 import s from '../pages/register/Register.module.css';
+import { Data } from './AdminTrackingForm';
 
-export default function TrackingForm() {
+interface TrackingFormProps {
+  setTrackingDetails: (details: Data) => void;
+}
+
+export default function TrackingForm({ setTrackingDetails }: TrackingFormProps) {
   const [trackingId, setTrackingId] = useState('');
   const [error, setError] = useState<string | null>('');
   const [loading, setLoading] = useState(false);
@@ -18,15 +23,15 @@ export default function TrackingForm() {
     setError('');
 
     try {
-      const res = await fetch(`${url}/track`, {
-        method: 'POST',
+      const res = await fetch(`${url}/trackings/${trackingId}`, {
+        method: 'GET',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ trackingId }),
       });
 
       const data = await res.json();
 
       if (res.ok) {
+        setTrackingDetails(data);
       } else {
         throw new Error(data.message);
       }
@@ -47,7 +52,7 @@ export default function TrackingForm() {
           onChange={handleChange}
           value={trackingId}
           type="text"
-          className=" border text-sm rounded-xl focus:ring-blue-500 focus:border-blue-500 block w-full p-4 bg-gray-600 border-gray-500 placeholder-gray-400 text-white"
+          className=" border text-sm rounded-xl focus:ring-[#00F0FF] focus:border-[#00F0FF] block w-full p-4 bg-gray-600 border-gray-500 placeholder-gray-400 text-white"
           placeholder="ID"
           required
         />
@@ -55,7 +60,7 @@ export default function TrackingForm() {
         <div className="flex gap-5">
           <button
             type="submit"
-            className="w-full text-gray-800 focus:ring-4 focus:outline-none font-medium rounded-xl text-base py-3 px-5 max-sm:py-4 text-center bg-[#00F0FF] hover:bg-blue-700 focus:ring-blue-800"
+            className="w-full text-gray-800 focus:ring-4 focus:outline-none font-medium rounded-xl text-base py-3 px-5 max-sm:py-4 text-center bg-[#00F0FF] hover:bg-[#a7f9ff] focus:ring-[#00F0FF]"
           >
             {loading ? <ImSpinner8 className='spin'/> : 'Submit'}
           </button>

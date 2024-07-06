@@ -1,37 +1,5 @@
 import React, { useState } from 'react';
-
-// Define the interface for a single table row
-interface ClientDetailsRow {
-  name: string;
-  email: string;
-  phone: string;
-  country: string;
-  address: string;
-  date: string;
-}
-
-interface PackageDetailsRow {
-  name: string;
-  desc: string;
-  length: string;
-  quantity: string;
-  weight: string;
-  width: string;
-}
-
-interface ShippingUpdateRow {
-  message: string;
-  location: string;
-  status: string;
-  time: string;
-}
-
-// Define the interface for the data object
-interface Data {
-  clientsDetails: ClientDetailsRow[];
-  packageDetails: PackageDetailsRow[];
-  shippingUpdate: ShippingUpdateRow[];
-}
+import { ClientDetails, Data, PackageDetails, ShippingUpdate } from "./AdminTrackingForm";
 
 // Define the interface for the tabs
 interface Tab {
@@ -45,59 +13,25 @@ const tabs: Tab[] = [
   { name: 'Shipping Update', key: 'shippingUpdate' },
 ];
 
-const data: Data = {
-  clientsDetails: [
-    {
-      name: 'Stevie van',
-      email: 'stevievan@gmail.com',
-      phone: '$2999',
-      country: 'Germany',
-      address: 'Skarbinastr 75 12309 Berlin',
-      date: '2015 jun 12',
-    },
-  ],
-  packageDetails: [
-    {
-      name: 'Shipment 4',
-      desc: 'Brown Box, Fragile and Digital',
-      length: '22cm',
-      quantity: '4',
-      weight: '37kg',
-      width: '22cm',
-    },
-    {
-      name: 'Shipment 5',
-      desc: 'green Box, Fragile and Digital',
-      length: '22cm',
-      quantity: '4',
-      weight: '37kg',
-      width: '22cm',
-    },
-  ],
-  shippingUpdate: [
-    {
-      message: 'Shipment',
-      location: 'Frankfrurt',
-      status: 'Pending ',
-      time: '11:00',
-    },
-    {
-      message: 'Shipment',
-      location: 'Frankfrurt',
-      status: 'Pending ',
-      time: '11:00',
-    },
-  ],
-};
+interface TrackingDetailsProps {
+  data: Data;
+}
 
-const TrackingDetails: React.FC = () => {
+const TrackingDetails: React.FC<TrackingDetailsProps> = ({ data }) => {
   const [activeTab, setActiveTab] = useState<keyof Data>(tabs[0].key);
 
   const getCellWidthClass = (text: string) => {
     return text.length > 7 ? 'min-w-[180px]' : text.length > 18 ? 'min-w-[250px]' : '';
   };
 
-  const renderTableRows = (rows: any[]) => {
+
+  
+
+  const renderTableRows = (rows: any) => {
+    if (!Array.isArray(rows)) {
+      return null;
+    }
+  
     return rows.map((row, index) => (
       <tr key={index} className="odd:bg-gray-900 even:bg-gray-800 border-b border-gray-700">
         {Object.values(row).map((value, i) => (
@@ -108,6 +42,7 @@ const TrackingDetails: React.FC = () => {
       </tr>
     ));
   };
+  
 
   return (
     <>

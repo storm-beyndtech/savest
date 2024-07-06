@@ -52,19 +52,22 @@ export default function ManageTracking() {
           <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400 bg-gray-100 dark:bg-gray-700">
             <thead className="text-xs text-gray-700 uppercase dark:text-gray-400">
               <tr>
-                <th scope="col" className="px-6 py-3 rounded-s-lg">
+                <th scope="col" className="min-w-35 text-nowrap px-6 py-3 rounded-s-lg">
                   Client's Name
                 </th>
-                <th scope="col" className="px-6 py-3 rounded-s-lg">
+                <th scope="col" className="min-w-35 text-nowrap px-6 py-3 rounded-s-lg">
                   Email
                 </th>
-                <th scope="col" className="px-6 py-3 rounded-s-lg">
+                <th scope="col" className="min-w-35 text-nowrap px-6 py-3 rounded-s-lg">
                   Phone
                 </th>
-                <th scope="col" className="px-6 py-3 rounded-s-lg">
+                <th scope="col" className="min-w-35 text-nowrap px-6 py-3 rounded-s-lg">
                   Country
                 </th>
-                <th scope="col" className="px-6 py-3 rounded-s-lg">
+                <th scope="col" className="min-w-35 text-nowrap px-6 py-3 rounded-s-lg">
+                  Tracking ID
+                </th>
+                <th scope="col" className="min-w-35 text-nowrap px-6 py-3 rounded-s-lg">
                   Action
                 </th>
               </tr>
@@ -83,6 +86,9 @@ export default function ManageTracking() {
                   </td>
                   <td className="px-6 py-4">
                     {tracking.clientsDetails[0]?.country || 'N/A'}
+                  </td>
+                  <td className="px-6 py-4">
+                    {tracking.clientsDetails[0]?._id || 'N/A'}
                   </td>
                   <td className="px-6 py-4">
                     <button

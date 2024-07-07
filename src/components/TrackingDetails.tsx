@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ClientDetails, Data, PackageDetails, ShippingUpdate } from "./AdminTrackingForm";
+import { Data } from "./AdminTrackingForm";
 
 // Define the interface for the tabs
 interface Tab {
@@ -25,7 +25,7 @@ const TrackingDetails: React.FC<TrackingDetailsProps> = ({ data }) => {
   };
 
 
-  
+
 
   const renderTableRows = (rows: any) => {
     if (!Array.isArray(rows)) {

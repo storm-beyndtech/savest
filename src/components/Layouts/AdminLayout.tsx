@@ -7,7 +7,7 @@ const AdminLayout = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
   useEffect(() => {
-    const chatCtn = document.getElementById('smartsupp-widget-container');
+    const chatCtn = document.getElementsByTagName('jdiv')[0] as HTMLElement;
     if (chatCtn) chatCtn.style.display = 'none';
 
     return () => {

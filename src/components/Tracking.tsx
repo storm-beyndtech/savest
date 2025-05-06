@@ -2,10 +2,10 @@
 import { useState } from "react";
 import TrackingDetails from "./TrackingDetails";
 import TrackingForm from "./TrackingForm";
-import { Data } from "./AdminTrackingForm";
+import { ShipmentData } from "./AdminTrackingForm";
 
 export default function Tracking() {
-  const [trackingDetails, setTrackingDetails] = useState<Data | null>(null);
+  const [trackingDetails, setTrackingDetails] = useState<ShipmentData | null>(null);
 
   return (
     <div>

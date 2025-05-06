@@ -1,48 +1,53 @@
 import React, { useState } from 'react';
-import { Data } from "./AdminTrackingForm";
+import { ShipmentData } from './AdminTrackingForm';
 
 // Define the interface for the tabs
 interface Tab {
   name: string;
-  key: keyof Data;
+  key: keyof ShipmentData;
 }
 
 const tabs: Tab[] = [
-  { name: 'Clients Details', key: 'clientsDetails' },
+  { name: 'Client Details', key: 'clientDetails' },
   { name: 'Package Details', key: 'packageDetails' },
   { name: 'Shipping Update', key: 'shippingUpdate' },
 ];
 
 interface TrackingDetailsProps {
-  data: Data;
+  data: ShipmentData;
 }
 
 const TrackingDetails: React.FC<TrackingDetailsProps> = ({ data }) => {
-  const [activeTab, setActiveTab] = useState<keyof Data>(tabs[0].key);
+  const [activeTab, setActiveTab] = useState<keyof ShipmentData>(tabs[0].key);
 
   const getCellWidthClass = (text: string) => {
     return text.length > 7 ? 'min-w-[180px]' : text.length > 18 ? 'min-w-[250px]' : '';
   };
 
-
-
-
   const renderTableRows = (rows: any) => {
-    if (!Array.isArray(rows)) {
-      return null;
+    if (Array.isArray(rows)) {
+      return rows.map((row, index) => (
+        <tr key={index} className="odd:bg-gray-900 even:bg-gray-800 border-b border-gray-700">
+          {Object.values(row).map((value, i) => (
+            <td key={i} className={`px-6 py-4 font-medium ${getCellWidthClass(String(value))}`}>
+              {value as React.ReactNode}
+            </td>
+          ))}
+        </tr>
+      ));
+    } else if (typeof rows === 'object' && rows !== null) {
+      return (
+        <tr className="odd:bg-gray-900 even:bg-gray-800 border-b border-gray-700">
+          {Object.values(rows).map((value, i) => (
+            <td key={i} className={`px-6 py-4 font-medium ${getCellWidthClass(String(value))}`}>
+              {value as React.ReactNode}
+            </td>
+          ))}
+        </tr>
+      );
     }
-  
-    return rows.map((row, index) => (
-      <tr key={index} className="odd:bg-gray-900 even:bg-gray-800 border-b border-gray-700">
-        {Object.values(row).map((value, i) => (
-          <td key={i} className={`px-6 py-4 font-medium ${getCellWidthClass(String(value))}`}>
-            {value as React.ReactNode}
-          </td>
-        ))}
-      </tr>
-    ));
+    return null;
   };
-  
 
   return (
     <>
@@ -66,14 +71,22 @@ const TrackingDetails: React.FC<TrackingDetailsProps> = ({ data }) => {
         <table className="w-full text-sm text-left rtl:text-right text-gray-400 shadow-2xl !rounded-3xl border overflow-hidden mb-8">
           <thead className="text-xs uppercase bg-gray-700 text-gray-400">
             <tr>
-              {Object.keys(data[activeTab][0]).map((header, index) => (
+              {Object.keys(
+                activeTab === 'clientDetails'
+                  ? data[activeTab]
+                  : data[activeTab][0]
+              ).map((header, index) => (
                 <th key={index} scope="col" className="px-6 py-3">
                   {header.charAt(0).toUpperCase() + header.slice(1)}
                 </th>
               ))}
             </tr>
           </thead>
-          <tbody>{renderTableRows(data[activeTab])}</tbody>
+          <tbody>
+            {activeTab === 'clientDetails'
+              ? renderTableRows(data[activeTab])
+              : renderTableRows(data[activeTab])}
+          </tbody>
         </table>
       </div>
     </>

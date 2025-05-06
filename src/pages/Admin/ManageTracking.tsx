@@ -1,41 +1,42 @@
 import AdminTrackingForm from '@/components/AdminTrackingForm';
 import { useEffect, useState } from 'react';
-import { Data } from '@/components/AdminTrackingForm';
+import { ShipmentData } from '@/components/AdminTrackingForm';
 
 export default function ManageTracking() {
-  const [trackings, setTrackings] = useState([]);
-  const [trackingData, setTrackingData] = useState<null | Data>(null);
+  const [trackings, setTrackings] = useState<ShipmentData[]>([]);
+  const [trackingData, setTrackingData] = useState<null | ShipmentData>(null);
   const [toggle, setToggle] = useState(false);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<null | string>(null);
   const url = import.meta.env.VITE_REACT_APP_SERVER_URL;
 
-  const toggleForm = (show: boolean, track: any) => {
+  const toggleForm = (show: boolean, track: ShipmentData | null) => {
     setToggle(show);
-    if (!show) setTrackingData(null);
-    else setTrackingData(track);
+    setTrackingData(show ? track : null);
   };
 
   const fetchTrackingData = async () => {
+    setLoading(true);
     try {
       const res = await fetch(`${url}/trackings`);
       const data = await res.json();
 
-      if (res.ok) setTrackings(data);
-      else throw new Error(data.message);
+      if (!res.ok) throw new Error(data.message);
+      setTrackings(data);
     } catch (error: any) {
-      setError(error.message);
+      setError(error?.message || 'Failed to fetch tracking data');
     } finally {
       setLoading(false);
+      setToggle(false);
     }
   };
 
   useEffect(() => {
     fetchTrackingData();
-  }, [toggle]);
+  }, []);
 
   if (loading) return <p>Loading...</p>;
-  if (error) return <p>{error}</p>;
+  if (error) return <p className="text-red-500">{error}</p>;
 
   return (
     <>
@@ -49,51 +50,30 @@ export default function ManageTracking() {
               Create new tracking
             </button>
           </div>
-          <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400 bg-gray-100 dark:bg-gray-700">
+          <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400 bg-gray-100 dark:bg-gray-700 border-collapse">
             <thead className="text-xs text-gray-700 uppercase dark:text-gray-400">
               <tr>
-                <th scope="col" className="min-w-35 text-nowrap px-6 py-3 rounded-s-lg">
-                  Client's Name
-                </th>
-                <th scope="col" className="min-w-35 text-nowrap px-6 py-3 rounded-s-lg">
-                  Email
-                </th>
-                <th scope="col" className="min-w-35 text-nowrap px-6 py-3 rounded-s-lg">
-                  Phone
-                </th>
-                <th scope="col" className="min-w-35 text-nowrap px-6 py-3 rounded-s-lg">
-                  Country
-                </th>
-                <th scope="col" className="min-w-35 text-nowrap px-6 py-3 rounded-s-lg">
-                  Tracking ID
-                </th>
-                <th scope="col" className="min-w-35 text-nowrap px-6 py-3 rounded-s-lg">
-                  Action
-                </th>
+                <th scope="col" className="px-6 py-3">Client's Name</th>
+                <th scope="col" className="px-6 py-3">Email</th>
+                <th scope="col" className="px-6 py-3">Phone</th>
+                <th scope="col" className="px-6 py-3">Country</th>
+                <th scope="col" className="px-6 py-3">Tracking ID</th>
+                <th scope="col" className="px-6 py-3">Action</th>
               </tr>
             </thead>
             <tbody>
-              {trackings.map((tracking: any, i) => (
-                <tr className="bg-white dark:bg-gray-800" key={i}>
-                  <td className="px-6 py-4">
-                    {tracking.clientsDetails[0]?.name || 'N/A'}
-                  </td>
-                  <td className="px-6 py-4">
-                    {tracking.clientsDetails[0]?.email || 'N/A'}
-                  </td>
-                  <td className="px-6 py-4">
-                    {tracking.clientsDetails[0]?.phone || 'N/A'}
-                  </td>
-                  <td className="px-6 py-4">
-                    {tracking.clientsDetails[0]?.country || 'N/A'}
-                  </td>
-                  <td className="px-6 py-4">
-                    {tracking.clientsDetails[0]?._id || 'N/A'}
-                  </td>
+              {trackings.map((tracking, i) => (
+                <tr className="bg-white dark:bg-gray-800 border-b" key={tracking._id || i}>
+                  <td className="px-6 py-4">{tracking.clientDetails.name || 'N/A'}</td>
+                  <td className="px-6 py-4">{tracking.clientDetails.email || 'N/A'}</td>
+                  <td className="px-6 py-4">{tracking.clientDetails.phone || 'N/A'}</td>
+                  <td className="px-6 py-4">{tracking.clientDetails.country || 'N/A'}</td>
+                  <td className="px-6 py-4">{tracking._id || 'N/A'}</td>
                   <td className="px-6 py-4">
                     <button
                       onClick={() => toggleForm(true, tracking)}
                       className="font-medium text-blue-600 dark:text-blue-500"
+                      aria-label={`Edit tracking ${tracking._id}`}
                     >
                       Edit
                     </button>
@@ -107,6 +87,7 @@ export default function ManageTracking() {
         <AdminTrackingForm
           initialTrackingData={trackingData}
           toggleForm={toggleForm}
+          refreshData={fetchTrackingData} // Pass fetch function to refresh data on form submit
         />
       )}
     </>

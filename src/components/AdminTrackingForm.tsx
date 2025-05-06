@@ -2,17 +2,26 @@ import React, { useEffect, useState } from 'react';
 import s from '../pages/login/Login.module.css';
 
 interface TrackingFormProps {
-  toggleForm: (show: boolean, track:Data|null) => void;
-  initialTrackingData: Data|null;
+  toggleForm: (show: boolean, track: ShipmentData | null) => void;
+  initialTrackingData: ShipmentData | null;
+  refreshData: () => void;
 }
 
 const AdminTrackingForm: React.FC<TrackingFormProps> = ({
   toggleForm,
   initialTrackingData,
+  refreshData
 }) => {
-  const [trackingData, setTrackingData] = useState<Data>({
+  const [trackingData, setTrackingData] = useState<ShipmentData>({
     _id: '',
-    clientsDetails: [],
+    clientDetails: {
+      name: '',
+      email: '',
+      phone: '',
+      country: '',
+      address: '',
+      date: '',
+    },
     packageDetails: [],
     shippingUpdate: [],
   });
@@ -25,35 +34,29 @@ const AdminTrackingForm: React.FC<TrackingFormProps> = ({
     if (initialTrackingData) {
       setTrackingData(initialTrackingData);
     }
-  }, []);
+  }, [initialTrackingData]);
 
-  const handleInputChange = <K extends keyof Data>(
+  const handleInputChange = <K extends keyof ShipmentData>(
     category: K,
-    index: number,
-    field: keyof Data[K][number],
+    index: number | null,
+    field: keyof ShipmentData[K][any] | keyof ClientDetails,
     value: string,
   ) => {
     const newData = { ...trackingData };
-    (newData[category] as any)[index][field] = value;
+
+    if (category === 'clientDetails') {
+      (newData[category] as any)[field] = value;
+    } else {
+      (newData[category] as any)[index!][field] = value;
+    }
+
     setTrackingData(newData);
   };
 
-
-
-
-  const addItem = (category: keyof Data) => {
+  const addItem = (category: keyof ShipmentData) => {
     const newData = { ...trackingData };
 
-    if (category === 'clientsDetails') {
-      newData.clientsDetails.push({
-        name: '',
-        email: '',
-        phone: '',
-        country: '',
-        address: '',
-        date: '',
-      });
-    } else if (category === 'packageDetails') {
+    if (category === 'packageDetails') {
       newData.packageDetails.push({
         name: '',
         desc: '',
@@ -66,14 +69,14 @@ const AdminTrackingForm: React.FC<TrackingFormProps> = ({
       newData.shippingUpdate.push({
         message: '',
         location: '',
-        status: '',
+        status: 'Pending',
         time: '',
       });
     }
     setTrackingData(newData);
   };
 
-  const removeItem = (category: keyof Data, index: number) => {
+  const removeItem = (category: keyof ShipmentData, index: number) => {
     const newData = { ...trackingData };
     (newData[category] as any).splice(index, 1);
     setTrackingData(newData);
@@ -84,22 +87,36 @@ const AdminTrackingForm: React.FC<TrackingFormProps> = ({
     setError(null);
     setLoading(true);
 
-    console.log(trackingData)
+    console.log(trackingData);
     try {
-      const res = await fetch(`${url}/trackings/${trackingData._id}`, {
-        method: 'PUT',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(trackingData),
-      });
-      if (!res.ok) {
-        const result = await res.json();
-        throw new Error(result.message);
+      if (trackingData._id === "") {
+        const res = await fetch(`${url}/trackings`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({...trackingData, _id: null}),
+        });
+        if (!res.ok) {
+          const result = await res.json();
+          throw new Error(result.message);
+        }
+      } else {
+        const res = await fetch(`${url}/trackings/${trackingData._id}`, {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(trackingData),
+        });
+        if (!res.ok) {
+          const result = await res.json();
+          throw new Error(result.message);
+        }
       }
       setLoading(false);
-      setSuccess('Tracking Data Uploaded Successfully');
+      setSuccess('Tracking Uploaded Successfully');
     } catch (err: any) {
       setError(err.message);
       setLoading(false);
+    } finally {
+      refreshData()
     }
   };
 
@@ -112,138 +129,91 @@ const AdminTrackingForm: React.FC<TrackingFormProps> = ({
         <h3 className="text-lg font-semibold text-gray-900 dark:text-white mt-6">
           Client Details
         </h3>
-        {trackingData.clientsDetails.map((client, index) => (
-          <div key={index} className="grid grid-cols-2 max-sm:grid-cols-1 gap-4 mt-8 mb-6">
-            <div>
-              <label className="customInputLabel">Client's Name</label>
-              <input
-                type="text"
-                value={client.name}
-                onChange={(e) =>
-                  handleInputChange(
-                    'clientsDetails',
-                    index,
-                    'name',
-                    e.target.value,
-                  )
-                }
-                placeholder="Name"
-                className="customInput"
-                required
-              />
-            </div>
-
-            <div>
-              <label className="customInputLabel">Email</label>
-              <input
-                type="email"
-                value={client.email}
-                onChange={(e) =>
-                  handleInputChange(
-                    'clientsDetails',
-                    index,
-                    'email',
-                    e.target.value,
-                  )
-                }
-                placeholder="Email"
-                className="customInput"
-                required
-              />
-            </div>
-
-            <div>
-              <label className="customInputLabel">Phone</label>
-              <input
-                type="text"
-                value={client.phone}
-                onChange={(e) =>
-                  handleInputChange(
-                    'clientsDetails',
-                    index,
-                    'phone',
-                    e.target.value,
-                  )
-                }
-                placeholder="Phone"
-                className="customInput"
-                required
-              />
-            </div>
-
-            <div>
-              <label className="customInputLabel">Country</label>
-              <input
-                type="text"
-                value={client.country}
-                onChange={(e) =>
-                  handleInputChange(
-                    'clientsDetails',
-                    index,
-                    'country',
-                    e.target.value,
-                  )
-                }
-                placeholder="Country"
-                className="customInput"
-                required
-              />
-            </div>
-
-            <div>
-              <label className="customInputLabel">Address</label>
-              <input
-                type="text"
-                value={client.address}
-                onChange={(e) =>
-                  handleInputChange(
-                    'clientsDetails',
-                    index,
-                    'address',
-                    e.target.value,
-                  )
-                }
-                placeholder="Address"
-                className="customInput"
-                required
-              />
-            </div>
-
-            <div>
-              <label className="customInputLabel">Date</label>
-              <input
-                type="date"
-                value={client.date}
-                onChange={(e) =>
-                  handleInputChange(
-                    'clientsDetails',
-                    index,
-                    'date',
-                    e.target.value,
-                  )
-                }
-                placeholder="Date"
-                className="customInput"
-                required
-              />
-            </div>
-
-            <button
-              type="button"
-              onClick={() => removeItem('clientsDetails', index)}
-              className="w-20 text-rose-200 bg-[#920f2b] hover:bg-[#61071b] rounded-lg text-xs font-medium px-2 py-1"
-            >
-              Remove
-            </button>
+        <div className="grid grid-cols-2 max-sm:grid-cols-1 gap-4 mt-8 mb-6">
+          <div>
+            <label className="customInputLabel">Client's Name</label>
+            <input
+              type="text"
+              value={trackingData.clientDetails.name}
+              onChange={(e) =>
+                handleInputChange('clientDetails', null, 'name', e.target.value)
+              }
+              placeholder="Name"
+              className="customInput"
+              required
+            />
           </div>
-        ))}
-        <button
-          type="button"
-          className="text-[#7fff62] bg-[#1ddd001a] hover:bg-[#77ff0046] rounded-lg text-sm font-medium px-5 py-2.5"
-          onClick={() => addItem('clientsDetails')}
-        >
-          Add Client
-        </button>
+
+          <div>
+            <label className="customInputLabel">Email</label>
+            <input
+              type="email"
+              value={trackingData.clientDetails.email}
+              onChange={(e) =>
+                handleInputChange('clientDetails', null, 'email', e.target.value)
+              }
+              placeholder="Email"
+              className="customInput"
+              required
+            />
+          </div>
+
+          <div>
+            <label className="customInputLabel">Phone</label>
+            <input
+              type="text"
+              value={trackingData.clientDetails.phone}
+              onChange={(e) =>
+                handleInputChange('clientDetails', null, 'phone', e.target.value)
+              }
+              placeholder="Phone"
+              className="customInput"
+              required
+            />
+          </div>
+
+          <div>
+            <label className="customInputLabel">Country</label>
+            <input
+              type="text"
+              value={trackingData.clientDetails.country}
+              onChange={(e) =>
+                handleInputChange('clientDetails', null, 'country', e.target.value)
+              }
+              placeholder="Country"
+              className="customInput"
+              required
+            />
+          </div>
+
+          <div>
+            <label className="customInputLabel">Address</label>
+            <input
+              type="text"
+              value={trackingData.clientDetails.address}
+              onChange={(e) =>
+                handleInputChange('clientDetails', null, 'address', e.target.value)
+              }
+              placeholder="Address"
+              className="customInput"
+              required
+            />
+          </div>
+
+          <div>
+            <label className="customInputLabel">Date</label>
+            <input
+              type="date"
+              value={trackingData.clientDetails.date}
+              onChange={(e) =>
+                handleInputChange('clientDetails', null, 'date', e.target.value)
+              }
+              placeholder="Date"
+              className="customInput"
+              required
+            />
+          </div>
+        </div>
       </div>
 
       <div className="mb-8">
@@ -258,12 +228,7 @@ const AdminTrackingForm: React.FC<TrackingFormProps> = ({
                 type="text"
                 value={pkg.name}
                 onChange={(e) =>
-                  handleInputChange(
-                    'packageDetails',
-                    index,
-                    'name',
-                    e.target.value,
-                  )
+                  handleInputChange('packageDetails', index, 'name', e.target.value)
                 }
                 placeholder="Name"
                 className="customInput"
@@ -277,12 +242,7 @@ const AdminTrackingForm: React.FC<TrackingFormProps> = ({
                 type="text"
                 value={pkg.desc}
                 onChange={(e) =>
-                  handleInputChange(
-                    'packageDetails',
-                    index,
-                    'desc',
-                    e.target.value,
-                  )
+                  handleInputChange('packageDetails', index, 'desc', e.target.value)
                 }
                 placeholder="Description"
                 className="customInput"
@@ -296,12 +256,7 @@ const AdminTrackingForm: React.FC<TrackingFormProps> = ({
                 type="text"
                 value={pkg.length}
                 onChange={(e) =>
-                  handleInputChange(
-                    'packageDetails',
-                    index,
-                    'length',
-                    e.target.value,
-                  )
+                  handleInputChange('packageDetails', index, 'length', e.target.value)
                 }
                 placeholder="Length"
                 className="customInput"
@@ -315,12 +270,7 @@ const AdminTrackingForm: React.FC<TrackingFormProps> = ({
                 type="text"
                 value={pkg.quantity}
                 onChange={(e) =>
-                  handleInputChange(
-                    'packageDetails',
-                    index,
-                    'quantity',
-                    e.target.value,
-                  )
+                  handleInputChange('packageDetails', index, 'quantity', e.target.value)
                 }
                 placeholder="Quantity"
                 className="customInput"
@@ -334,12 +284,7 @@ const AdminTrackingForm: React.FC<TrackingFormProps> = ({
                 type="text"
                 value={pkg.weight}
                 onChange={(e) =>
-                  handleInputChange(
-                    'packageDetails',
-                    index,
-                    'weight',
-                    e.target.value,
-                  )
+                  handleInputChange('packageDetails', index, 'weight', e.target.value)
                 }
                 placeholder="Weight"
                 className="customInput"
@@ -353,12 +298,7 @@ const AdminTrackingForm: React.FC<TrackingFormProps> = ({
                 type="text"
                 value={pkg.width}
                 onChange={(e) =>
-                  handleInputChange(
-                    'packageDetails',
-                    index,
-                    'width',
-                    e.target.value,
-                  )
+                  handleInputChange('packageDetails', index, 'width', e.target.value)
                 }
                 placeholder="Width"
                 className="customInput"
@@ -396,12 +336,7 @@ const AdminTrackingForm: React.FC<TrackingFormProps> = ({
                 type="text"
                 value={update.message}
                 onChange={(e) =>
-                  handleInputChange(
-                    'shippingUpdate',
-                    index,
-                    'message',
-                    e.target.value,
-                  )
+                  handleInputChange('shippingUpdate', index, 'message', e.target.value)
                 }
                 placeholder="Message"
                 className="customInput"
@@ -415,12 +350,7 @@ const AdminTrackingForm: React.FC<TrackingFormProps> = ({
                 type="text"
                 value={update.location}
                 onChange={(e) =>
-                  handleInputChange(
-                    'shippingUpdate',
-                    index,
-                    'location',
-                    e.target.value,
-                  )
+                  handleInputChange('shippingUpdate', index, 'location', e.target.value)
                 }
                 placeholder="Location"
                 className="customInput"
@@ -430,21 +360,18 @@ const AdminTrackingForm: React.FC<TrackingFormProps> = ({
 
             <div>
               <label className="customInputLabel">Status</label>
-              <input
-                type="text"
+              <select
                 value={update.status}
                 onChange={(e) =>
-                  handleInputChange(
-                    'shippingUpdate',
-                    index,
-                    'status',
-                    e.target.value,
-                  )
+                  handleInputChange('shippingUpdate', index, 'status', e.target.value)
                 }
-                placeholder="Status"
                 className="customInput"
                 required
-              />
+              >
+                <option value="Pending">Pending</option>
+                <option value="In Transit">In Transit</option>
+                <option value="Delivered">Delivered</option>
+              </select>
             </div>
 
             <div>
@@ -453,12 +380,7 @@ const AdminTrackingForm: React.FC<TrackingFormProps> = ({
                 type="text"
                 value={update.time}
                 onChange={(e) =>
-                  handleInputChange(
-                    'shippingUpdate',
-                    index,
-                    'time',
-                    e.target.value,
-                  )
+                  handleInputChange('shippingUpdate', index, 'time', e.target.value)
                 }
                 placeholder="Time"
                 className="customInput"
@@ -532,9 +454,9 @@ export interface ShippingUpdate {
   time: string;
 }
 
-export interface Data {
+export interface ShipmentData {
   _id: string;
-  clientsDetails: ClientDetails[];
+  clientDetails: ClientDetails;
   packageDetails: PackageDetails[];
   shippingUpdate: ShippingUpdate[];
 }

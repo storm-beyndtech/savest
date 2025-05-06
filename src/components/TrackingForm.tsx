@@ -1,13 +1,15 @@
 import { useState } from 'react';
 import { ImSpinner8 } from 'react-icons/im';
 import s from '../pages/register/Register.module.css';
-import { Data } from './AdminTrackingForm';
+import { ShipmentData } from './AdminTrackingForm';
 
 interface TrackingFormProps {
-  setTrackingDetails: (details: Data) => void;
+  setTrackingDetails: (details: ShipmentData) => void;
 }
 
-export default function TrackingForm({ setTrackingDetails }: TrackingFormProps) {
+export default function TrackingForm({
+  setTrackingDetails,
+}: TrackingFormProps) {
   const [trackingId, setTrackingId] = useState('');
   const [error, setError] = useState<string | null>('');
   const [loading, setLoading] = useState(false);
@@ -62,7 +64,7 @@ export default function TrackingForm({ setTrackingDetails }: TrackingFormProps) 
             type="submit"
             className="w-full text-gray-800 focus:ring-4 focus:outline-none font-medium rounded-xl text-base py-3 px-5 max-sm:py-4 text-center bg-[#00F0FF] hover:bg-[#a7f9ff] focus:ring-[#00F0FF]"
           >
-            {loading ? <ImSpinner8 className='spin'/> : 'Submit'}
+            {loading ? <ImSpinner8 className="spin mx-auto" /> : 'Submit'}
           </button>
         </div>
       </form>
